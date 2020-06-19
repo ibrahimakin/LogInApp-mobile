@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">LogInApp</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Accounts</string>
+    <string name="tab_text_2">Details</string>
+    <string name="tab_text_3">Add</string>
+    <string name="Site">Site</string>
+    <string name="EMail">e-mail</string>
+    <string name="Username">Kullanıcı Adı</string>
+    <string name="Hint">İpucu</string>
+    <string name="Labels">Etiket</string>
+    <string name="Delete">Sil</string>
+    <string name="Add">Ekle</string>
 </resources>
