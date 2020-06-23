@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="6">
+        <TextView
+            android:text="@string/Site"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/Site"
+            android:text="site adı"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:text="@string/EMail"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/EMail"
+            android:text="mail adı"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:text="@string/Site"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/Username"
+            android:text="kullanıcı adı"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:text="@string/Hint"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/Hint"
+            android:text="ipucu adı"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:text="@string/Labels"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/Labels"
+            android:text="etiket adı"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <Button
+            android:id="@+id/btnDelete"
+            android:text="@string/Delete"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:id="@+id/dNotification"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
