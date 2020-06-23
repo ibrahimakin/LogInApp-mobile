@@ -5,6 +5,10 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.PlaceholderFragment">
-
+    tools:context=".ui.main.AccountsFragment">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountList"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

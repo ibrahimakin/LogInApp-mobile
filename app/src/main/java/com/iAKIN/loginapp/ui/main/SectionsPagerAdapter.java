@@ -35,7 +35,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         else if(position == 2){
             return AddFragment.newInstance();
         }
-        return PlaceholderFragment.newInstance(position + 1);
+        return AccountsFragment.newInstance(position + 1);
     }
 
     @Nullable
@@ -48,6 +48,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return 3;
     }
 }
