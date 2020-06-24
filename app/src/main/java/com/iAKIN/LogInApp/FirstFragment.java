@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iAKIN.LogInApp.Data.Record;
+import com.iAKIN.LogInApp.Data.Source;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -21,14 +25,23 @@ public class FirstFragment extends Fragment implements MyAdapter.OnItemListener 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Record[] myDataset= {new Record("deneme1.com","deneme1@mail.com"), new Record("deneme2.com","deneme2@mail.com"), new Record("deneme3.com","deneme3@mail.com"), new Record("deneme4.com","deneme4@mail.com")};
+    //Record[] rs = {new Record("deneme1.com", "deneme1@mail.com"), new Record("deneme2.com", "deneme2@mail.com"), new Record("deneme3.com", "deneme3@mail.com"), new Record("deneme4.com", "deneme4@mail.com")}
+    private List<Record> myDataset = new ArrayList<Record>();
+
+    Source ds;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        View root = inflater.inflate(R.layout.fragment_first, container, false);
+
+        ds = new Source(root.getContext());
+        ds.open();
+        myDataset = ds.getRecords();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return root;
     }
 
     static public FirstFragment getFragment(){
@@ -42,13 +55,13 @@ public class FirstFragment extends Fragment implements MyAdapter.OnItemListener 
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyAdapter(myDataset,this);
         recyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
     public void onItemClick(int position) {
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment);
-        Log.d(TAG, "Clicked " + position);
+        //Log.d(TAG, "Clicked " + position);
     }
+
 }

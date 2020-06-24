@@ -19,15 +19,26 @@ public class Record {
         Hash = hash;
     }
 
+    public Record(String site, String email, String username, String hint, String labels, String registrationDate, String changingDate, int sync, String hash)
+    {
+        Site = site;
+        EMail = email;
+        Username = username;
+        Hint = hint;
+        Labels = labels;
+        RegistrationDate = registrationDate;
+        ChangingDate = changingDate;
+        Sync = sync;
+        Hash = hash;
+    }
+
     public Record(String site, String email)
     {
         Site = site;
         EMail = email;
     }
 
-    public int getId() {
-        return Id;
-    }
+    public int getId() { return Id; }
 
     public void setId(int id) {
         Id = id;

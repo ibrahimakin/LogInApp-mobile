@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.iAKIN.LogInApp.Data.Record;
 
+import java.util.List;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private Record[] mDataset;
+    static public List<Record> mDataset;
     private OnItemListener mOnItemListener;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -61,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(Record[] myDataset, OnItemListener onItemListener) {
+    public MyAdapter(List<Record> myDataset, OnItemListener onItemListener) {
         mDataset = myDataset;
         this.mOnItemListener = onItemListener;
     }
@@ -93,13 +95,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // - replace the contents of the view with that element
         TextView textView = holder.siteTextView;
         Button button = holder.emailButton;
-        textView.setText(mDataset[position].getSite());
-        button.setText(mDataset[position].getEMail());
+        textView.setText(mDataset.get(position).getSite());
+        button.setText(mDataset.get(position).getEMail());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }

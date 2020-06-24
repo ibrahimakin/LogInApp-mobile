@@ -78,10 +78,10 @@
 
         <Button
             android:id="@+id/btnAdd"
-            android:text="@string/Add"
-            android:layout_gravity="center"
+            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_gravity="center"
+            android:text="@string/Add" />
 
     </GridLayout>
 
