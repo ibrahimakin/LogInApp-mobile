@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iAKIN.LogInApp.Data.Record;
+import com.iAKIN.LogInApp.Data.RecordList;
 import com.iAKIN.LogInApp.Data.Source;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+
 
 public class FirstFragment extends Fragment implements MyAdapter.OnItemListener  {
 
@@ -39,7 +41,7 @@ public class FirstFragment extends Fragment implements MyAdapter.OnItemListener 
 
         ds = new Source(root.getContext());
         ds.open();
-        myDataset = ds.getRecords();
+        RecordList.setList(ds.getRecords());
         // Inflate the layout for this fragment
         return root;
     }
@@ -53,14 +55,25 @@ public class FirstFragment extends Fragment implements MyAdapter.OnItemListener 
         recyclerView = (RecyclerView) view.findViewById(R.id.accountList);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyAdapter(myDataset,this);
+        mAdapter = new MyAdapter(RecordList.getList(),this);
         recyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void onItemClick(int position) {
-        NavHostFragment.findNavController(FirstFragment.this)
-                .navigate(R.id.action_FirstFragment_to_SecondFragment);
+        SecondFragment fragmentSecondLand = (SecondFragment) getFragmentManager().findFragmentById(R.id.fragmentSecondLand);
+        //Landscape mod için
+        if(fragmentSecondLand != null && fragmentSecondLand.isVisible()){
+            fragmentSecondLand.getDetails(position);
+        }
+        else {
+            RecordList.setLastClickedIndex(position);
+            NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
+            //SecondFragment fragmentSecond = (SecondFragment) getFragmentManager().findFragmentById(R.id.SecondFragment);
+            //Log.d(TAG, "Tikla " + fragmentSecond);
+
+        }
+
         //Log.d(TAG, "Clicked " + position);
     }
 
