@@ -17,12 +17,12 @@
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
+
         <TextView
             android:id="@+id/Site"
-            android:text="site adı"
-            android:layout_gravity="center"
+            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_gravity="center"/>
         <TextView
             android:text="@string/EMail"
             android:layout_gravity="center"
@@ -30,18 +30,16 @@
             android:layout_rowWeight="1"/>
         <TextView
             android:id="@+id/EMail"
-            android:text="mail adı"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
         <TextView
-            android:text="@string/Site"
+            android:text="@string/Username"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
         <TextView
             android:id="@+id/Username"
-            android:text="kullanıcı adı"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
@@ -52,7 +50,6 @@
             android:layout_rowWeight="1"/>
         <TextView
             android:id="@+id/Hint"
-            android:text="ipucu adı"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
@@ -63,7 +60,6 @@
             android:layout_rowWeight="1"/>
         <TextView
             android:id="@+id/Labels"
-            android:text="etiket adı"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>

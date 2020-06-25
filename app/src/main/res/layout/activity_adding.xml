@@ -18,7 +18,7 @@
 
         <EditText
             android:id="@+id/Site"
-            android:text="site adı"
+            android:minWidth="60dp"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
@@ -30,19 +30,19 @@
 
         <EditText
             android:id="@+id/EMail"
-            android:text="mail adı"
+            android:minWidth="60dp"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
 
-        <TextView android:text="@string/Site"
+        <TextView android:text="@string/Username"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
 
         <EditText
             android:id="@+id/Username"
-            android:text="kullanıcı adı"
+            android:minWidth="60dp"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
@@ -54,7 +54,7 @@
 
         <EditText
             android:id="@+id/Hint"
-            android:text="ipucu adı"
+            android:minWidth="60dp"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>
@@ -66,7 +66,7 @@
 
         <EditText
             android:id="@+id/Labels"
-            android:text="etiket adı"
+            android:minWidth="60dp"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"/>

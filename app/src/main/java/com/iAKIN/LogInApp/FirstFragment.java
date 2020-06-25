@@ -73,8 +73,8 @@ public class FirstFragment extends Fragment implements MyAdapter.OnItemListener 
             //Log.d(TAG, "Tikla " + fragmentSecond);
 
         }
-
-        //Log.d(TAG, "Clicked " + position);
+        //System.out.println(position);
+        Log.d(TAG, "Kayıt " + position);
     }
 
 }

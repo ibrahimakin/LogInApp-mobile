@@ -65,8 +65,8 @@ public class Source {
         c.close();
         return records;
     }
-    public void deleteRecord(Record r){
-        String hash = r.getHash();
-        db.delete("Records", "hash = " + hash, null);
+    public void DeleteRecord(String hash){
+        //String hash = r.getHash();
+        db.delete("Records", "hash = '" + hash+"'", null);
     }
 }

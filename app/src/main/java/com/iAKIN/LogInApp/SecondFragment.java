@@ -1,6 +1,7 @@
 package com.iAKIN.LogInApp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.iAKIN.LogInApp.Data.Record;
 import com.iAKIN.LogInApp.Data.RecordList;
 import com.iAKIN.LogInApp.Data.Source;
 
+import static android.content.ContentValues.TAG;
+
 public class SecondFragment extends Fragment {
 
     Source ds;
@@ -27,10 +30,8 @@ public class SecondFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_second, container, false);
 
         tvSite = root.findViewById(R.id.Site);
@@ -39,16 +40,27 @@ public class SecondFragment extends Fragment {
         tvHint = root.findViewById(R.id.Hint);
         tvLabels = root.findViewById(R.id.Labels);
 
-        r = RecordList.getLastClickedElement();
+        if(RecordList.getLastClickedIndex() != -1){
+            r = RecordList.getLastClickedElement();
+            if(r!=null){
+                tvSite.setText(r.getSite());
+                tvEMail.setText(r.getEMail());
+                tvUsername.setText(r.getUsername());
+                tvHint.setText(r.getHint());
+                tvLabels.setText(r.getHash());
 
-        tvSite.setText(r.getSite());
-        tvEMail.setText(r.getEMail());
-        tvUsername.setText(r.getUsername());
-        tvHint.setText(r.getHint());
-        tvLabels.setText(r.getLabels());
+                ds = new Source(root.getContext());
+                ds.open();
+            }
+        }
+        else{
+            tvSite.setText("");
+            tvEMail.setText("");
+            tvUsername.setText("");
+            tvHint.setText("");
+            tvLabels.setText("");
+        }
 
-        //ds = new Source(root.getContext());
-        //ds.open();
         // Inflate the layout for this fragment
         return root;
     }
@@ -60,21 +72,46 @@ public class SecondFragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Silindi.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                //Record r = null;
-                //ds.deleteRecord(r);
+                if(RecordList.getLastClickedIndex() != -1){
+                    Record r = RecordList.getLastClickedElement();
+                    Log.d(TAG, "Kayıt " + r);
+                    if(r!=null){
+                        ds.DeleteRecord(r.getHash());
+                        RecordList.deleteElement(r);
+                        RecordList.setLastClickedIndex(-1);
+                        ShowNotification("Silindi.", v);
+                    }
+                }
+                else{
+                    ShowNotification("Silinecek Kaydı Seçin.", v);
+                }
             }
         });
     }
 
+    private void ShowNotification(String Message, View v) {
+        Snackbar.make(v, Message, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    }
+
     public void getDetails(int position) {
-        r = RecordList.getListElement(position);
-        if(r!=null){
-            tvSite.setText(r.getSite());
-            tvEMail.setText(r.getEMail());
-            tvUsername.setText(r.getUsername());
-            tvHint.setText(r.getHint());
-            tvLabels.setText(r.getLabels());
+
+        if(position != -1){
+            r = RecordList.getListElement(position);
+            if(r != null){
+                tvSite.setText(r.getSite());
+                tvEMail.setText(r.getEMail());
+                tvUsername.setText(r.getUsername());
+                tvHint.setText(r.getHint());
+                tvLabels.setText(r.getHash());
+            }
         }
+        else{
+            tvSite.setText("");
+            tvEMail.setText("");
+            tvUsername.setText("");
+            tvHint.setText("");
+            tvLabels.setText("");
+        }
+
     }
 }
