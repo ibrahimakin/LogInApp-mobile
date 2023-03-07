@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/item_list_fragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/item_list_fragment"
+        android:name="com.iAKIN.loginapp.fragments.List"
+        android:label="LogInApp">
+        <action
+            android:id="@+id/show_item_detail"
+            app:destination="@id/item_detail_fragment" />
+        <action
+            android:id="@+id/list_to_create"
+            app:destination="@id/itemCreateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_detail_fragment"
+        android:name="com.iAKIN.loginapp.fragments.Detail"
+        android:label="Detail"
+        tools:layout="@layout/fragment_item_detail">
+        <argument
+            android:name="item_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/detail_to_create"
+            app:destination="@id/itemCreateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemCreateFragment"
+        android:name="com.iAKIN.loginapp.fragments.Create"
+        android:label="Create"
+        tools:layout="@layout/fragment_item_create" />
+
+</navigation>
