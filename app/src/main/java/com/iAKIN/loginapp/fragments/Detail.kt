@@ -1,5 +1,6 @@
 package com.iAKIN.loginapp.fragments
 
+import android.app.AlertDialog
 import android.content.ClipData
 import android.os.Bundle
 import android.view.DragEvent
@@ -11,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.iAKIN.loginapp.R
-import com.iAKIN.loginapp.database.Record
+import com.iAKIN.loginapp.data.DBHelper
+import com.iAKIN.loginapp.data.Record
+import com.iAKIN.loginapp.data.Site
 import com.iAKIN.loginapp.databinding.FragmentItemDetailBinding
 import java.net.URI
 
@@ -71,18 +74,42 @@ class Detail : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
         val rootView = binding.root
+        val db = DBHelper(context!!)
 
-        binding.fabDetail.setOnClickListener { view -> view.findNavController().navigate(R.id.detail_to_create) }
+        binding.fab.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.detail_to_create)
+        }
+        binding.update.setOnClickListener {
+            db.update(
+                item!!.id, Record(
+                    site.text.toString(),
+                    email.text.toString(),
+                    username.text.toString(),
+                    hint.text.toString(),
+                    tags.text.toString()
+                )
+            )
+        }
+        binding.delete.setOnClickListener {
+            AlertDialog.Builder(context).setTitle("Delete")
+                .setMessage("Do you really want to delete the record?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    if (db.delete(item!!.id) == 1) activity?.supportFragmentManager?.popBackStack()
+                }.setNegativeButton(android.R.string.cancel, null).show();
+        }
 
         toolbarLayout = binding.toolbarLayout
-        site = binding.editText1!!
-        email = binding.editText2!!
-        username = binding.editText3!!
-        hint = binding.editText4!!
-        tags = binding.editText5!!
+        site = binding.editText1
+        email = binding.editText2
+        username = binding.editText3
+        hint = binding.editText4
+        tags = binding.editText5
 
         updateContent()
         rootView.setOnDragListener(dragListener)
@@ -94,10 +121,23 @@ class Detail : Fragment() {
         try {
             val uri = URI(item?.site)
             val domain: String = uri.host
+            // binding.detailText.text = if (domain.startsWith("www.")) domain.substring(4) else domain
             toolbarLayout?.title = if (domain.startsWith("www.")) domain.substring(4) else domain
-        }
-        catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
+            // binding.detailText.text = item?.site
             toolbarLayout?.title = item?.site
+        }
+
+        /*try {
+            Site.fetchIcon(binding.imageView, item?.site.toString())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }*/
+
+        try {
+            Site.webScrapping(binding.imageView, item?.site.toString())
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         // Show the placeholder content as text in a TextView.

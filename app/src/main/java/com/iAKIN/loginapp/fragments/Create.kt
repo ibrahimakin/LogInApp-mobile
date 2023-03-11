@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.iAKIN.loginapp.database.DBHelper
-import com.iAKIN.loginapp.database.Record
+import com.iAKIN.loginapp.data.DBHelper
+import com.iAKIN.loginapp.data.Record
 import com.iAKIN.loginapp.databinding.FragmentItemCreateBinding
 
 class Create : Fragment() {
@@ -24,19 +24,22 @@ class Create : Fragment() {
 
         var db = DBHelper(context!!)
 
-        binding.add.setOnClickListener{ view ->
+        binding.add.setOnClickListener { view ->
             var site = binding.editText1.text.toString()
             var email = binding.editText2.text.toString()
-            var username = binding.editText3.text.toString()
-            var hint = binding.editText4.text.toString()
-            var tags = binding.editText5.text.toString()
 
             if (site.isNotEmpty() && email.isNotEmpty()) {
-                var record = Record(site, email, username, hint, tags)
+                var record = Record(
+                    site,
+                    email,
+                    binding.editText3.text.toString(),
+                    binding.editText4.text.toString(),
+                    binding.editText5.text.toString()
+                )
                 db.insert(record);
-            }
-            else {
-                Toast.makeText(requireContext(), "Site and e-mail are required.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(requireContext(), "Site and e-mail are required.", Toast.LENGTH_LONG)
+                    .show();
             }
         }
         return binding.root
