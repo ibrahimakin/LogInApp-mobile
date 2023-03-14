@@ -1,10 +1,21 @@
-package com.iAKIN.loginapp.database
+package com.iAKIN.loginapp.data
 
-import android.net.Uri
 import android.content.Context
+import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import org.json.JSONArray
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
+import java.time.LocalDateTime
 
-class FileReader {
+import java.time.format.DateTimeFormatter
+
+
+
+
+
+class Sync {
     companion object {
         fun readFile(uri: Uri?,context: Context?) {
             try {
@@ -33,6 +44,26 @@ class FileReader {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+        fun getMD5Hash(input: String): String {
+            val md: MessageDigest = MessageDigest.getInstance("MD5")
+            val hashInBytes: ByteArray = md.digest(input.toByteArray(StandardCharsets.UTF_8))
+
+            val sb = StringBuilder()
+            for (b in hashInBytes) {
+                sb.append(String.format("%02x", b))
+            }
+            //System.out.println(sb.toString());
+            //System.out.println(sb.toString());
+            return sb.toString()
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun getTime(): String {
+            val dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
+            val now = LocalDateTime.now()
+            return dtf.format(now)
         }
     }
 }
