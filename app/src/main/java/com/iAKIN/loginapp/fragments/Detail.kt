@@ -74,9 +74,7 @@ class Detail : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
         val rootView = binding.root
         val db = DBHelper(context!!)
@@ -86,22 +84,18 @@ class Detail : Fragment() {
         }
         binding.update.setOnClickListener {
             db.update(
-                item!!.id, Record(
-                    site.text.toString(),
-                    email.text.toString(),
-                    username.text.toString(),
-                    hint.text.toString(),
-                    tags.text.toString()
+                item!!.id,
+                Record(
+                    site.text.toString(), email.text.toString(), username.text.toString(), hint.text.toString(), tags.text.toString()
                 )
             )
         }
         binding.delete.setOnClickListener {
-            AlertDialog.Builder(context).setTitle("Delete")
+            AlertDialog.Builder(context, R.style.AlertDialogStyle).setTitle("Delete")
                 .setMessage("Do you really want to delete the record?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    if (db.delete(item!!.id) == 1) activity?.supportFragmentManager?.popBackStack()
-                }.setNegativeButton(android.R.string.cancel, null).show();
+                .setPositiveButton(android.R.string.ok) { _, _ -> if (db.delete(item!!.id) == 1) activity?.supportFragmentManager?.popBackStack() }
+                .setNegativeButton(android.R.string.cancel, null).show();
         }
 
         toolbarLayout = binding.toolbarLayout
@@ -121,18 +115,10 @@ class Detail : Fragment() {
         try {
             val uri = URI(item?.site)
             val domain: String = uri.host
-            // binding.detailText.text = if (domain.startsWith("www.")) domain.substring(4) else domain
             toolbarLayout?.title = if (domain.startsWith("www.")) domain.substring(4) else domain
         } catch (e: Exception) {
-            // binding.detailText.text = item?.site
             toolbarLayout?.title = item?.site
         }
-
-        /*try {
-            Site.fetchIcon(binding.imageView, item?.site.toString())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }*/
 
         try {
             Site.webScrapping(binding.imageView, item?.site.toString())

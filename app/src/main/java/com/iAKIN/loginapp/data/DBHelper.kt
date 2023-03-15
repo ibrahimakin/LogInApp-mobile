@@ -7,22 +7,22 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 import java.util.Date
 
-val db_name = "database"
-val table_name = "records"
-val id = "id"
-val site = "site"
-val email = "email"
-val username = "username"
-val hint = "hint"
-val tags = "tags"
-val changingDate = "changingDate"
-val registrationDate = "registrationDate"
-val hash = "hash"
-val sync = "sync"
+const val db_name = "database"
+const val table_name = "records"
+const val id = "id"
+const val site = "site"
+const val email = "email"
+const val username = "username"
+const val hint = "hint"
+const val tags = "tags"
+const val changingDate = "changingDate"
+const val registrationDate = "registrationDate"
+const val hash = "hash"
+const val sync = "sync"
 
 class DBHelper(var context: Context) : SQLiteOpenHelper(context, db_name, null, 1) {
     override fun onCreate(p0: SQLiteDatabase?) {
-        var createTable = " CREATE TABLE " + table_name + "(" +
+        val createTable = " CREATE TABLE " + table_name + "(" +
                 id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 site + " VARCHAR(256)," +
                 email + " VARCHAR(256)," +
@@ -63,13 +63,13 @@ class DBHelper(var context: Context) : SQLiteOpenHelper(context, db_name, null, 
     }
 
     fun read(): MutableList<Record> {
-        var list: MutableList<Record> = ArrayList()
+        val list: MutableList<Record> = ArrayList()
         val db = this.readableDatabase
-        var query = " select * from $table_name"
-        var result = db.rawQuery(query, null)
+        val query = " select * from $table_name"
+        val result = db.rawQuery(query, null)
         if (result.moveToFirst()) {
             do {
-                var record = Record(
+                val record = Record(
                     result.getInt(result.getColumnIndexOrThrow(id)),
                     result.getString(result.getColumnIndexOrThrow(site)),
                     result.getString(result.getColumnIndexOrThrow(email)),

@@ -7,13 +7,10 @@ class Record {
     var username: String = "";
     var hint: String = "";
     var tags: String = "";
-
-    // not show
     var changingDate: String = "";
     var registrationDate: String = "";
     var hash: String = "";
     var sync: Int = 2;
-
 
     constructor(site: String, email: String, username: String, hint: String, tags: String) {
         this.site = site
@@ -47,5 +44,5 @@ class Record {
         this.sync = sync
     }
 
-    constructor() {}
+    constructor()
 }

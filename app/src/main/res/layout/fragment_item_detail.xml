@@ -18,6 +18,7 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:collapsedTitleTextColor="?attr/colorOnPrimary"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Shadow"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -27,6 +28,7 @@
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/icon"
                 android:src="@drawable/login_app" />
 
             <androidx.appcompat.widget.Toolbar
@@ -50,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="50px"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
             android:stretchColumns="1">
 
@@ -59,18 +61,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Site" />
+                    android:text="@string/site" />
 
                 <EditText
                     android:id="@+id/editText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Site" />
+                    android:inputType="textUri" />
 
             </TableRow>
 
@@ -79,18 +79,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="e-mail" />
+                    android:text="@string/e_mail" />
 
                 <EditText
                     android:id="@+id/editText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="e-mail" />
+                    android:inputType="textEmailAddress" />
 
             </TableRow>
 
@@ -99,18 +97,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username" />
+                    android:text="@string/username" />
 
                 <EditText
                     android:id="@+id/editText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Username" />
+                    android:inputType="text|textUri" />
 
             </TableRow>
 
@@ -119,18 +115,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hint" />
+                    android:text="@string/hint" />
 
                 <EditText
                     android:id="@+id/editText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Hint" />
+                    android:inputType="textVisiblePassword" />
 
             </TableRow>
 
@@ -139,18 +133,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tags" />
+                    android:text="@string/tags" />
 
                 <EditText
                     android:id="@+id/editText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Tags" />
+                    android:inputType="textAutoComplete" />
 
             </TableRow>
 
@@ -165,13 +157,14 @@
         android:layout_gravity="center_vertical|start"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/design_default_color_primary_variant"
-        app:backgroundTint="#aaa"
-        app:borderWidth="6px"
+        android:backgroundTint="?attr/colorPrimary"
+        android:contentDescription="@string/add"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:borderWidth="2dp"
         app:layout_anchor="@+id/item_detail_scroll_view"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@android:drawable/ic_input_add"
-        app:tint="@color/white" />
+        app:tint="?attr/colorOnPrimary" />
 
     <Button
         android:id="@+id/delete"
@@ -179,8 +172,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="40px"
-        android:text="Delete"
-        android:textAllCaps="false" />
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        app:strokeColor="?attr/colorPrimaryVariant"
+        app:strokeWidth="1dp" />
 
     <Button
         android:id="@+id/update"
@@ -188,7 +183,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="40px"
-        android:text="Update"
-        android:textAllCaps="false" />
+        android:text="@string/update"
+        android:textAllCaps="false"
+        app:strokeColor="?attr/colorPrimaryVariant"
+        app:strokeWidth="1dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

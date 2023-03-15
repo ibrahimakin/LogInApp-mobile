@@ -8,9 +8,7 @@
     tools:context=".HostActivity"
     tools:ignore="MergeRootFrame">
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/item_create_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="50px"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
             android:stretchColumns="1">
 
@@ -30,17 +28,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Site" />
+                    android:text="@string/site" />
 
                 <EditText
                     android:id="@+id/editText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="textUri" />
 
             </TableRow>
 
@@ -49,17 +46,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="e-mail" />
+                    android:text="@string/e_mail" />
 
                 <EditText
                     android:id="@+id/editText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="textEmailAddress" />
 
             </TableRow>
 
@@ -68,17 +64,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username" />
+                    android:text="@string/username" />
 
                 <EditText
                     android:id="@+id/editText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="text|textUri" />
 
             </TableRow>
 
@@ -87,17 +82,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hint" />
+                    android:text="@string/hint" />
 
                 <EditText
                     android:id="@+id/editText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="textVisiblePassword" />
 
             </TableRow>
 
@@ -106,17 +100,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tags" />
+                    android:text="@string/tags" />
 
                 <EditText
                     android:id="@+id/editText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="textAutoComplete" />
 
             </TableRow>
 
@@ -124,13 +117,29 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="50dp"
+        android:alpha=".3"
+        android:rotation="-30"
+        android:rotationY="200"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/login_app" />
+
     <Button
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="40px"
-        android:text="Add"
+        android:text="@string/add"
         android:textAllCaps="false"
-        android:theme="@style/Theme.LogInApp" />
+        app:strokeColor="?attr/colorPrimaryVariant"
+        app:strokeWidth="1dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
