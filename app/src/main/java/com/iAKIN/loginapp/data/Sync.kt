@@ -8,20 +8,14 @@ import org.json.JSONArray
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.time.LocalDateTime
-
 import java.time.format.DateTimeFormatter
-
-
-
-
 
 class Sync {
     companion object {
-        fun readFile(uri: Uri?,context: Context?) {
+        fun readFile(uri: Uri?, context: Context?) {
             try {
                 val stream = context?.contentResolver?.openInputStream(uri!!)
                 val inputString = stream?.bufferedReader().use { it?.readText() }
-
                 val data = JSONArray(inputString)
 
                 // looping through All nodes
@@ -39,7 +33,9 @@ class Sync {
                     val sync = c.getInt("sync")
                     // use >  int id = c.getInt("duration"); if you     want get an int
 
-                    DBHelper(context!!).insert(Record(id, site, email, username, hint, tags, changingDate, registrationDate, hash, sync))
+                    DBHelper(context!!).insert(
+                        Record(id, site, email, username, hint, tags, changingDate, registrationDate, hash, sync)
+                    )
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -49,13 +45,8 @@ class Sync {
         fun getMD5Hash(input: String): String {
             val md: MessageDigest = MessageDigest.getInstance("MD5")
             val hashInBytes: ByteArray = md.digest(input.toByteArray(StandardCharsets.UTF_8))
-
             val sb = StringBuilder()
-            for (b in hashInBytes) {
-                sb.append(String.format("%02x", b))
-            }
-            //System.out.println(sb.toString());
-            //System.out.println(sb.toString());
+            for (b in hashInBytes) sb.append(String.format("%02x", b))
             return sb.toString()
         }
 

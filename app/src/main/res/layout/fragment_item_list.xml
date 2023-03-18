@@ -6,14 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        tools:layout_editor_absoluteY="1dp" />
-    -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_list"
         android:name="com.iAKIN.loginapp.ItemListFragment"
@@ -29,14 +21,16 @@
         android:id="@+id/fab_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/design_default_color_primary"
-        app:borderWidth="0px"
+        android:backgroundTint="?attr/colorPrimary"
+        android:contentDescription="@string/sync"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:borderWidth="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_popup_sync"
-        app:tint="@color/white" />
+        app:tint="?attr/colorOnPrimary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_list"
@@ -44,11 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/design_default_color_primary"
-        app:borderWidth="0px"
+        android:backgroundTint="?attr/colorPrimary"
+        android:contentDescription="@string/add"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:borderWidth="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        app:tint="@color/white" />
+        app:tint="?attr/colorOnPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ class Site {
             val aspRat = w / h.toDouble() // get aspect ratio
             val width = 400
             val height = width / aspRat
-
             val b = Bitmap.createScaledBitmap(image, width, height.toInt(), false)
             // Only for making changes in UI
             handler.post { imageView.setImageBitmap(b) }

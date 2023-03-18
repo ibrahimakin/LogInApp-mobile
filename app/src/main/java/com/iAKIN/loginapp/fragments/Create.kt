@@ -15,31 +15,20 @@ class Create : Fragment() {
     private var _binding: FragmentItemCreateBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentItemCreateBinding.inflate(inflater, container, false)
 
-        var db = DBHelper(context!!)
+        val db = DBHelper(context!!)
 
-        binding.add.setOnClickListener { view ->
-            var site = binding.editText1.text.toString()
-            var email = binding.editText2.text.toString()
+        binding.add.setOnClickListener {
+            val site = binding.editText1.text.toString()
+            val email = binding.editText2.text.toString()
 
             if (site.isNotEmpty() && email.isNotEmpty()) {
-                var record = Record(
-                    site,
-                    email,
-                    binding.editText3.text.toString(),
-                    binding.editText4.text.toString(),
-                    binding.editText5.text.toString()
-                )
-                db.insert(record);
+                val record = Record(site, email, binding.editText3.text.toString(), binding.editText4.text.toString(), binding.editText5.text.toString())
+                db.insert(record)
             } else {
-                Toast.makeText(requireContext(), "Site and e-mail are required.", Toast.LENGTH_LONG)
-                    .show();
+                Toast.makeText(requireContext(), "Site and e-mail are required.", Toast.LENGTH_LONG).show()
             }
         }
         return binding.root

@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/item_list_fragment"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/item_list_fragment">
 
     <fragment
         android:id="@+id/item_list_fragment"
@@ -24,8 +24,8 @@
         tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="item_id"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/detail_to_create"
             app:destination="@id/itemCreateFragment" />

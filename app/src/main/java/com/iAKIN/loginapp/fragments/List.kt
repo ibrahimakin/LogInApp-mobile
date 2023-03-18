@@ -22,7 +22,6 @@ import com.iAKIN.loginapp.data.Sync
 import com.iAKIN.loginapp.databinding.FragmentItemListBinding
 import com.iAKIN.loginapp.databinding.ItemListContentBinding
 
-
 /**
  * A Fragment representing a list of Pings. This fragment
  * has different presentations for handset and larger screen devices. On
@@ -33,26 +32,22 @@ import com.iAKIN.loginapp.databinding.ItemListContentBinding
  */
 
 class List : Fragment() {
-
     /**
      * Method to intercept global key events in the
      * item list fragment to trigger keyboard shortcuts
      * Currently provides a toast when Ctrl + Z and Ctrl + F
      * are triggered
      */
-    private val unhandledKeyEventListenerCompat =
-        ViewCompat.OnUnhandledKeyEventListenerCompat { v, event ->
-            if (event.keyCode == KeyEvent.KEYCODE_Z && event.isCtrlPressed) {
-                Toast.makeText(v.context, "Undo (Ctrl + Z) shortcut triggered", Toast.LENGTH_LONG)
-                    .show()
-                true
-            } else if (event.keyCode == KeyEvent.KEYCODE_F && event.isCtrlPressed) {
-                Toast.makeText(v.context, "Find (Ctrl + F) shortcut triggered", Toast.LENGTH_LONG)
-                    .show()
-                true
-            }
-            false
+    private val unhandledKeyEventListenerCompat = ViewCompat.OnUnhandledKeyEventListenerCompat { v, event ->
+        if (event.keyCode == KeyEvent.KEYCODE_Z && event.isCtrlPressed) {
+            Toast.makeText(v.context, "Undo (Ctrl + Z) shortcut triggered", Toast.LENGTH_LONG).show()
+            true
+        } else if (event.keyCode == KeyEvent.KEYCODE_F && event.isCtrlPressed) {
+            Toast.makeText(v.context, "Find (Ctrl + F) shortcut triggered", Toast.LENGTH_LONG).show()
+            true
         }
+        false
+    }
 
     private var _binding: FragmentItemListBinding? = null
     private lateinit var adapter: SimpleItemRecyclerViewAdapter
@@ -64,14 +59,12 @@ class List : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
-        binding.fabList.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.list_to_create)
-        }
-        binding.fabRead.setOnClickListener { view ->
+
+        binding.fabList.setOnClickListener { view -> view.findNavController().navigate(R.id.list_to_create) }
+
+        binding.fabRead.setOnClickListener {
             // Request code for creating a PDF document.
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
@@ -115,17 +108,17 @@ class List : Fragment() {
         search?.isIconifiedByDefault = false
         search?.isIconified = false
         search?.queryHint = "Search"
-        if (searchText?.isEmpty() == false) {
+
+        if (searchText.isNotEmpty()) {
             search?.setQuery(searchText, true)
             searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
             searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
             searchItem.expandActionView()
             adapter.filter(searchText)
         }
+
         search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(p0: String): Boolean = false
 
             override fun onQueryTextChange(p0: String): Boolean {
                 searchText = p0
@@ -137,39 +130,34 @@ class List : Fragment() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView, itemDetailFragmentContainer: View?) {
-        adapter = SimpleItemRecyclerViewAdapter(
-            DBHelper(this.requireContext()).read(),
-            itemDetailFragmentContainer
-        )
+        adapter = SimpleItemRecyclerViewAdapter(DBHelper(this.requireContext()).read(), itemDetailFragmentContainer)
         recyclerView.adapter = adapter
     }
 
-    class SimpleItemRecyclerViewAdapter :
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+    class SimpleItemRecyclerViewAdapter(
+        values: MutableList<Record>, private var itemDetailFragmentContainer: View?
+    ) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private var allValues: MutableList<Record> = ArrayList()
         private var values: MutableList<Record> = ArrayList()
-        private var itemDetailFragmentContainer: View?
 
-        constructor(values: MutableList<Record>, itemDetailFragmentContainer: View?) {
-            this.itemDetailFragmentContainer = itemDetailFragmentContainer
+        init {
             this.values.addAll(values)
-            allValues.addAll(values);
+            allValues.addAll(values)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val binding =
-                ItemListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding = ItemListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ViewHolder(binding)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.id.toString()
-            holder.contentView.text = item.site
+            val i = values[position]
+            holder.idView.text = i.id.toString()
+            holder.contentView.text = i.site
 
             with(holder.itemView) {
-                tag = item
+                tag = i
                 setOnClickListener { itemView ->
                     val item = itemView.tag as Record
                     val bundle = Bundle()
@@ -180,8 +168,7 @@ class List : Fragment() {
                     bundle.putString(Detail.ARG_ITEM_HINT, item.hint)
                     bundle.putString(Detail.ARG_ITEM_TAGS, item.tags)
                     if (itemDetailFragmentContainer != null) {
-                        itemDetailFragmentContainer!!.findNavController()
-                            .navigate(R.id.show_item_detail, bundle)
+                        itemDetailFragmentContainer!!.findNavController().navigate(R.id.show_item_detail, bundle)
                     } else {
                         itemView.findNavController().navigate(R.id.show_item_detail, bundle)
                     }
@@ -194,9 +181,7 @@ class List : Fragment() {
                      */
                     setOnContextClickListener { v ->
                         val item = v.tag as Record
-                        Toast.makeText(
-                            v.context, "Context click of item " + item.id, Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(v.context, "Context click of item " + item.id, Toast.LENGTH_LONG).show()
                         true
                     }
                 }
@@ -204,12 +189,8 @@ class List : Fragment() {
                 setOnLongClickListener { v ->
                     // Setting the item id as the clip data so that the drop target is able to
                     // identify the id of the content
-                    val clipItem = ClipData.Item(item.id.toString())
-                    val dragData = ClipData(
-                        v.tag as? CharSequence,
-                        arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                        clipItem
-                    )
+                    val clipItem = ClipData.Item(i.id.toString())
+                    val dragData = ClipData(v.tag as? CharSequence, arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), clipItem)
 
                     if (Build.VERSION.SDK_INT >= 24) {
                         v.startDragAndDrop(dragData, View.DragShadowBuilder(v), null, 0)
@@ -222,8 +203,7 @@ class List : Fragment() {
 
         override fun getItemCount() = values.size
 
-        inner class ViewHolder(binding: ItemListContentBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        inner class ViewHolder(binding: ItemListContentBinding) : RecyclerView.ViewHolder(binding.root) {
             val idView: TextView = binding.idText
             val contentView: TextView = binding.content
         }
